@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<!-- 
+    1、穿参数 自定义传$event
+    2、表达式的使用
+    3、@ v-on 同意    :   v-bind 同意
+ -->
+<head>
+    <title>测试vue</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="zh-CN" />
+    <meta name="Author" content="TIMI" />
+    <meta name="Copyright" content="TIMI" />
+    <meta name="keywords" content="test" />
+    <meta name="description" content="test Vue" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .red {
+            background: red
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app-7">
+        <input 
+        type="button" 
+        v-for="item,i in allList" 
+        v-bind:value="item.title" 
+        v-on:click="selectIndex(i)"
+        v-bind:class="{red :i == index }" />
+        <div v-for="item,j in allList" v-bind:style="{display:j===index?'block':'none'}">
+            <p v-for="option in item.list">{{option.subtitle}}</p>
+        </div>
+    </div>
+    <script>
+        // 如果  v-on:click="selectIndex(i)" 选择传参数,如果也需要event的时候,需要手动传入
+        //  v-on:click="selectIndex($event,i)"
+        let allList = [
+            {
+                title: '文字',
+                list: [
+                    { subtitle: '哈哈' },
+                    { subtitle: '嘻嘻' }
+                ]
+            },
+            {
+                title: '数字',
+                list: [
+                    { subtitle: '12' },
+                    { subtitle: '23' }
+                ]
+            },
+            {
+                title: '字母',
+                list: [
+                    { subtitle: 're' },
+                    { subtitle: 'tr' }
+                ]
+            }
+        ]
+
+        var app7 = new Vue({
+            el: '#app-7',
+            data: {
+                groceryList: [
+                    { id: 0, text: '蔬菜' },
+                    { id: 1, text: '奶酪' },
+                    { id: 2, text: '随便其它什么人吃的东西' }
+                ],
+                allList: allList,
+                index: 2 //默认显示第一个
+            },
+            methods:{
+                selectIndex(i){
+                    this.index = i
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

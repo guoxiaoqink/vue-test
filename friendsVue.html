@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<!-- 
+    好友列表实例子
+ -->
+<head>
+    <title>测试vue</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="zh-CN" />
+    <meta name="Author" content="TIMI" />
+    <meta name="Copyright" content="TIMI" />
+    <meta name="keywords" content="test" />
+    <meta name="description" content="test Vue" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .red {
+            background: red
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app-7">
+        <div v-for="item,index in allList" >
+            <h2 @click="openItem(index)">{{item.title}}</h2>
+            <ol :style="{display:item.isopen? 'block':'none'}">
+                <li v-for="i in item.list">{{i.subtitle}}</li>
+            </ol>
+        </div>
+    </div>
+    <script>
+        let allList = [
+            {
+                title: '家人',
+                isopen:false,
+                list: [
+                    { subtitle: '哈哈' },
+                    { subtitle: '嘻嘻' }
+                ]
+            },
+            {
+                title: '数字',
+                isopen:true,
+                list: [
+                    { subtitle: '12' },
+                    { subtitle: '23' }
+                ]
+            },
+            {
+                title: '字母',
+                isopen:false,
+                list: [
+                    { subtitle: 're' },
+                    { subtitle: 'tr' }
+                ]
+            }
+        ]
+
+        var app7 = new Vue({
+            el: '#app-7',
+            data: {
+                allList: allList,
+            },
+            methods:{
+                openItem(index){
+                    this.allList[index].isopen = !this.allList[index].isopen
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

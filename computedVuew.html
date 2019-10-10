@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<!-- 
+    好友列表实例子
+ -->
+
+<head>
+    <title>测试vue</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="zh-CN" />
+    <meta name="Author" content="TIMI" />
+    <meta name="Copyright" content="TIMI" />
+    <meta name="keywords" content="test" />
+    <meta name="description" content="test Vue" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .red {
+            background: red
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app-7">
+        <input type="text" v-model="message">
+        <span>{{message}}</span>
+        <p>{{reverse}}</p>
+        <span>{{list}}</span>
+        <p>{{getreverList}}</p>
+
+        <input v-model="testSet" type="checkbox">
+    </div>
+
+    <script>
+        var app7 = new Vue({
+            el: '#app-7',
+            data: {
+                message: 'abcdefghigk',
+                list: [1, 2, 3, 4, 5]
+            },
+            computed: { //计算属性: 当计算属性中依赖的data发生变化的时候, 计算属性重新计算
+            //2、如果只是定义没有,使用,就不会被调用
+            //3、在页面中使用 是取值 reverse == ‘热预热’是设置值
+            //4、如果计算函数只有一个,默认是取值 , 如果想设置值,用两个函数  set get
+                reverse() {
+                    return this.message.split('').reverse().join('')
+                },
+                getreverList() {
+                    return this.list.map(item => item * 2).filter(item => item < 10)
+                },
+                testSet:{
+                    get(){
+                        //执行了get
+                        console.log('执行了get')
+                        return false
+                    },
+                    set(def){
+                        //执行了set
+                        console.log('执行了set')
+                        console.log(def)
+                    }
+                },
+                testSet2(){
+                    return true
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <title>测试vue</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Language" content="zh-CN" />
+
+  <meta name="Author" content="TIMI" />
+  <meta name="Copyright" content="TIMI" />
+  <meta name="keywords" content="test" />
+  <meta name="description" content="test Vue" />
+</head>
+
+<body>
+  <div id="app">
+    <p>{{name}}</p>
+    <p k-text="name">haha</p>
+    <p>{{name}}</p>
+    <p>{{age}}</p>
+    <p>
+      {{doubleAge}}
+    </p>
+    <input type="text" k-model="name"/>
+    <button @click="changeName">呵呵</button>
+    <div k-html="html"></div>
+  </div>
+
+  <script src="./compile.js"></script>
+  <script src="./gvue.js"></script>
+  <script>
+    const app = new Gvue({
+      el: '#app',
+      data: {
+        name: "I am test",
+        age: 12,
+        html: '<button>这是一个按钮</button>'
+      },
+      created() {
+        console.log('这是一个好的开始')
+        setTimeout(() => {
+          //名字改成测试
+          this.name = '这个名字改成了测试'
+        }, 1500)
+      },
+      methods: {
+        changeName() {
+          this.name = '第二次改名字为nunu'
+          this.age = 1
+        }
+      }
+    })
+    // app.name = 'hello gxq'
+    // app.foo.bar = 'this is a bar'
+
+  </script>
+</body>
+
+</html>
